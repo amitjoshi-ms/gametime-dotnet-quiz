@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://gametime-dotnet-quiz-data.pages.dev/schemas/chunk.schema.json",
+  "title": "QuestionChunk",
+  "description": "A container for a batch of quiz questions",
+  "type": "object",
+  "required": ["id", "generatedAt", "category", "sourceUrl", "questions"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Chunk identifier matching filename without .json",
+      "pattern": "^[a-z0-9-]+-\\d{3}-[a-f0-9]{8}$",
+      "examples": ["csharp-basics-001-a1b2c3d4"]
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when chunk was generated"
+    },
+    "category": {
+      "type": "string",
+      "description": "Category of questions in this chunk",
+      "pattern": "^[a-z0-9-]+$",
+      "examples": ["csharp-basics"]
+    },
+    "sourceUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the source documentation page"
+    },
+    "questions": {
+      "type": "array",
+      "description": "Array of questions in this chunk",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/Question"
+      }
+    }
+  },
+  "$defs": {
+    "Question": {
+      "type": "object",
+      "required": ["id", "questionText", "options", "correctIndex", "explanation"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique question identifier"
+        },
+        "questionText": {
+          "type": "string",
+          "minLength": 10,
+          "description": "The question being asked"
+        },
+        "options": {
+          "type": "array",
+          "description": "Exactly 2 answer options",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "correctIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Index of the correct option (0 or 1)"
+        },
+        "explanation": {
+          "type": "string",
+          "minLength": 10,
+          "description": "Explanation of why the correct answer is correct"
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "id": "csharp-basics-001-a1b2c3d4",
+      "generatedAt": "2026-01-16T02:00:00Z",
+      "category": "csharp-basics",
+      "sourceUrl": "https://dotnet.microsoft.com/en-us/learn/csharp",
+      "questions": [
+        {
+          "id": "550e8400-e29b-41d4-a716-446655440000",
+          "questionText": "What keyword declares an immutable variable in C#?",
+          "options": ["const", "var"],
+          "correctIndex": 0,
+          "explanation": "The 'const' keyword creates a compile-time constant that cannot be changed after declaration."
+        },
+        {
+          "id": "550e8400-e29b-41d4-a716-446655440001",
+          "questionText": "Which type is used for whole numbers in C#?",
+          "options": ["int", "double"],
+          "correctIndex": 0,
+          "explanation": "The 'int' type represents 32-bit signed integers, while 'double' is for floating-point numbers."
+        }
+      ]
+    }
+  ]
+}
