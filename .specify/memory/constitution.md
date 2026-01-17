@@ -1,50 +1,107 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+SYNC IMPACT REPORT
+==================
+Version change: 1.0.0 (initial)
+Modified principles: N/A (new constitution)
+Added sections: Core Principles (5), Technology Stack, Git Workflow, Governance
+Removed sections: N/A
+Templates requiring updates:
+  - .specify/templates/plan-template.md: ⚠ pending review
+  - .specify/templates/spec-template.md: ⚠ pending review
+  - .specify/templates/tasks-template.md: ⚠ pending review
+Follow-up TODOs: None
+-->
+
+# GameTime .NET Quiz Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Zero Cost Infrastructure
+All infrastructure MUST use free tiers exclusively. No paid services permitted.
+- Cloudflare Pages for hosting (unlimited bandwidth)
+- GitHub Actions for CI/CD (2000 minutes/month)
+- GitHub Models for LLM (openai/gpt-4o-mini free tier)
+- **Rationale**: Learning project with no budget; validates that quality apps can be built at zero cost.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Static-First Architecture
+The application MUST compile to purely static assets with no server-side runtime.
+- Blazor WebAssembly in standalone mode (no ASP.NET Core host)
+- All data served as static JSON from Cloudflare Pages
+- No databases, no server functions, no backend APIs
+- **Rationale**: Simplifies deployment, eliminates cold starts, maximizes caching efficiency.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Immutable Content Caching
+Generated content MUST use content-addressed filenames for aggressive caching.
+- Question chunks named `{category}-{seq}-{hash8}.json`
+- Chunks receive `Cache-Control: immutable, max-age=31536000`
+- Manifest receives `Cache-Control: no-cache, must-revalidate`
+- **Rationale**: Users get instant loads after first visit; bandwidth costs stay zero.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Additive-Only Content
+Questions MUST only be added, never deleted or modified in place.
+- New questions go into new chunk files
+- Existing chunks are immutable once deployed
+- Content hash tracking detects source changes for regeneration
+- **Rationale**: Preserves cache validity; simplifies state management; no data loss risk.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Test-First Development
+All non-trivial code MUST have tests written before implementation.
+- Minimum 80% line coverage, 70% branch coverage
+- Critical paths (scoring, data loading, hashing) require 100% coverage
+- Use xUnit + FluentAssertions + NSubstitute
+- **Rationale**: Prevents regressions; enables confident refactoring; documents intent.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Technology Stack
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+| Category | Technology | Version | Locked |
+|----------|------------|---------|--------|
+| Runtime | .NET | 10.0 | ✅ |
+| Framework | Blazor WebAssembly | Standalone | ✅ |
+| UI Library | Microsoft.FluentUI.AspNetCore.Components | 5.0.0 | ✅ |
+| Testing | xUnit | 2.9.0 | ✅ |
+| Assertions | FluentAssertions | 7.0.0 | ✅ |
+| Mocking | NSubstitute | 5.3.0 | ✅ |
+| Scraping | AngleSharp | 1.2.0 | ✅ |
+| LLM | GitHub Models (openai/gpt-4o-mini) | - | ✅ |
+| Hosting | Cloudflare Pages | Free tier | ✅ |
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+Technology changes require constitution amendment with migration plan.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Git Workflow
+
+### Two-Repository Structure
+- **gametime-dotnet-quiz** (CODE): Blazor app + QuestionGenerator; branch protection REQUIRED
+- **gametime-dotnet-quiz-data** (DATA): Generated JSON; no branch protection (bot commits)
+
+### Commit Message Format
+All commits MUST follow conventional commit format:
+```
+<type>(<scope>): <subject>
+```
+Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
+
+### Pull Request Requirements
+- All PRs to `main` MUST pass: build, test, lint
+- Self-merge permitted for solo development
+- Squash merge preferred for clean history
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other project documentation in case of conflict.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+### Amendment Process
+1. Open PR with proposed changes to this file
+2. Document rationale and impact in PR description
+3. Update version number following semver:
+   - MAJOR: Principle removal or backward-incompatible change
+   - MINOR: New principle or section added
+   - PATCH: Clarifications, typos, non-semantic changes
+4. Update `LAST_AMENDED_DATE` to current date
+5. Merge after review (or self-merge for solo projects)
+
+### Compliance
+- All PRs MUST verify compliance with constitution principles
+- AI agents MUST read this file before making architectural decisions
+- Deviations require explicit justification in PR description
+
+**Version**: 1.0.0 | **Ratified**: 2026-01-16 | **Last Amended**: 2026-01-16
