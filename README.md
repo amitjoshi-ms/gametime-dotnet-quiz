@@ -49,7 +49,7 @@ This separation enables branch protection on the code repo while allowing automa
 |----------|------------|---------|
 | **Runtime** | .NET | 10.0 |
 | **Framework** | Blazor WebAssembly | Standalone |
-| **UI Library** | Microsoft.FluentUI.AspNetCore.Components | 5.0.0 |
+| **UI Library** | Microsoft.FluentUI.AspNetCore.Components | 4.13.2 |
 | **Hosting** | Cloudflare Pages | Free tier |
 | **LLM** | GitHub Models | openai/gpt-4o-mini |
 | **Testing** | xUnit + FluentAssertions + NSubstitute | Latest |

@@ -23,7 +23,7 @@ Most technology decisions were made during project initialization and are locked
 
 ### 2. UI Component Library
 
-**Decision**: Microsoft.FluentUI.AspNetCore.Components v5.0.0  
+**Decision**: Microsoft.FluentUI.AspNetCore.Components v4.13.2  
 **Rationale**:
 - Constitution locks Fluent UI
 - Microsoft design system consistency

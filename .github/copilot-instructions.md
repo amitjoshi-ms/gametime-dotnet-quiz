@@ -4,7 +4,7 @@ Auto-generated from all feature plans. Last updated: 2026-01-16
 
 ## Active Technologies
 
-- C# 13 / .NET 10.0 + Blazor WASM (standalone), Microsoft.FluentUI.AspNetCore.Components 5.0.0 (001-blazor-quiz-app)
+- C# 13 / .NET 10.0 + Blazor WASM (standalone), Microsoft.FluentUI.AspNetCore.Components 4.13.2 (001-blazor-quiz-app)
 
 ## Project Structure
 
@@ -72,7 +72,7 @@ See `docs/` folder:
 
 ## Recent Changes
 
-- 001-blazor-quiz-app: Added C# 13 / .NET 10.0 + Blazor WASM (standalone), Microsoft.FluentUI.AspNetCore.Components 5.0.0
+- 001-blazor-quiz-app: Added C# 13 / .NET 10.0 + Blazor WASM (standalone), Microsoft.FluentUI.AspNetCore.Components 4.13.2
 
 <!-- MANUAL ADDITIONS START -->
 <!-- MANUAL ADDITIONS END -->

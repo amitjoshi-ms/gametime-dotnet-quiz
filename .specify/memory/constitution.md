@@ -57,7 +57,7 @@ All non-trivial code MUST have tests written before implementation.
 |----------|------------|---------|--------|
 | Runtime | .NET | 10.0 | ✅ |
 | Framework | Blazor WebAssembly | Standalone | ✅ |
-| UI Library | Microsoft.FluentUI.AspNetCore.Components | 5.0.0 | ✅ |
+| UI Library | Microsoft.FluentUI.AspNetCore.Components | 4.13.2 | ✅ |
 | Testing | xUnit | 2.9.0 | ✅ |
 | Assertions | FluentAssertions | 7.0.0 | ✅ |
 | Mocking | NSubstitute | 5.3.0 | ✅ |

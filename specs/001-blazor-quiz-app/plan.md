@@ -10,7 +10,7 @@ Build a static Blazor WebAssembly quiz application that presents 10 random multi
 ## Technical Context
 
 **Language/Version**: C# 13 / .NET 10.0  
-**Primary Dependencies**: Blazor WASM (standalone), Microsoft.FluentUI.AspNetCore.Components 5.0.0  
+**Primary Dependencies**: Blazor WASM (standalone), Microsoft.FluentUI.AspNetCore.Components 4.13.2  
 **Storage**: Static JSON files fetched from remote endpoint (no database)  
 **Testing**: xUnit 2.9.0, FluentAssertions 7.0.0, NSubstitute 5.3.0  
 **Target Platform**: Browser (WASM), deployed to Cloudflare Pages  
